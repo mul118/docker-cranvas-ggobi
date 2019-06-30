@@ -21,6 +21,7 @@ Then, browse to http://127.0.0.1:6080/ . Open Rstudio and attach the cranvas lib
 
 To build the docker image, navigate to the root laminar directory and type:
 
+
 ``` bash
 docker build -t docker-cranvas-ggobi .
 ```
