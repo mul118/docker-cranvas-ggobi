@@ -13,7 +13,9 @@ RUN apt-get update \
     r-base-dev \
     libssl-dev \
     libssl1.0.0 \
-    libxml2-dev
+    libxml2-dev \
+    libgtk2.0-dev \
+    ggobi
 
 RUN wget "http://www.rstudio.org/download/latest/stable/desktop/ubuntu64/rstudio-latest-amd64.deb" \
   && gdebi -n rstudio-*-amd64.deb \
@@ -33,7 +35,8 @@ RUN R -e "install.packages(c( \
     'objectSignals', \
     'objectProperties', \ 
     'plumbr', \
-    'SearchTrees'))"
+    'SearchTrees', \
+    'rggobi'))"
 
 ENV R_REMOTES_NO_ERRORS_FROM_WARNINGS=true
 
