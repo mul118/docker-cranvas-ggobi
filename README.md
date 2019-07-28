@@ -1,8 +1,7 @@
 # docker-cranvas-ggobi
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![ Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/mul118/docker-cranvas-ggobi)](https://hub.docker.com/r/mul118/docker-cranvas-ggobi)
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Docker image containing a browser-accessible Ubuntu installation with included Rstudio Desktop,  [Cranvas](https://github.com/ggobi/cranvas) interactive exploratory data analysis library, and [GGobi](http://ggobi.org/)/[rggobi](https://github.com/ggobi/rggobi) high-dimensional visualization program. Also included is the [idendro](https://github.com/tsieger/idendro) Cranvas extension enabling interactive exploration of heirarchical clustering dendrograms.
 
