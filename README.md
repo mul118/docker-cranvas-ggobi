@@ -1,6 +1,7 @@
 # docker-cranvas-ggobi
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![ Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/mul118/docker-cranvas-ggobi)](https://hub.docker.com/r/mul118/docker-cranvas-ggobi)
 
 
 Docker image containing a browser-accessible Ubuntu installation with included Rstudio Desktop, and cranvas interactive exploratory data analysis library.
