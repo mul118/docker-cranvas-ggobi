@@ -31,7 +31,33 @@ While Cranvas may not be 'the future', the IEDA ideas behind it definitely are, 
 
 ## Resources
 
+
 TODO: tutorial resources and sample code.
+
+### Statistical Graphics
+
+- [Mondrian](http://mondrian.theusrus.de/) - Interactive dynamic graphics GUI
+  - Tutorial/case studies: [slides](http://www.interactivegraphics.org/Slides.html)
+  - Book: [Dynamic Graphics for Interactive Data Exploration](http://mondrian.theusrus.de/)
+  
+  
+### Cranvas 
+
+Afaik, Cranvas does not have a cohesive vignette (a large part of its hipster charm ;)). My recommendation is to go through the Mondrian tutorial slides above, then the package docs below, then reproduce the tips tutorial using Cranvas.
+
+- [Tutorial (package docs)](https://www.rdocumentation.org/packages/cranvas) - see qscatter, qhist, qbar, qparallel for intro examples
+- [Cranvas Overview Paper](https://arxiv.org/pdf/1409.7256.pdf) 
+
+- Qtime
+- Model visualizations
+
+
+### Tools
+
+- *Idendro*: [Intro & Sample Code](https://github.com/tsieger/idendro) | [Full Vignette](https://github.com/tsieger/idendro/blob/master/inst/doc/idendro.pdf)
+
+- *GGobi*: [Resources](http://www.ggobi.org/docs) | [Manual](http://www.ggobi.org/docs/manual.pdf) | [Rggobi Intro](http://www.ggobi.org/rggobi/introduction.pdf)
+
 
 ## Build
 
