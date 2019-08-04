@@ -1,0 +1,210 @@
+---
+title: "Cranvas Cheetsheet"
+author: "misha"
+date: "8/4/2019"
+output: html_document
+---
+
+
+# Common Interactions
+
+The key press and release events often involve with setting the selection mode of the brush, the alpha transparency, and deleting selected elements, and so on. Mouse press, release, move and hover are often related to brushing and identifying cases. These functions implement these common processes.
+
+## Mouse Events
+
+Left click to brush the plot with a rectangle brush, and right click to resize the brush (the cursor shape will become a cross). The middle button is used to toggle between two types of brushes: one type is to keep the brush on the plot when the mouse is released, and the other type is to hide it on mouse release. When the mouse is released, the brush history will be saved (save_brush_history).
+
+## Key Events
+
+The keys A, O, X, N and C corresponds to the selection mode AND, OR, XOR, NOT and COMPLEMENT respectively.
+
+Plus (+) and Minus (-) can increase or decrease the alpha transparency exponentially.
+
+The key Delete will make the selected elements invisible, and F5 makes all the elements visible.
+
+The question key (?) toggles the identify mode (on or off). The cross cursor shape (+) indicates it is in the identify mode, and a normal cursor indicates the brush mode.
+
+The key S acts like the middle button of the mouse (toggles between two brush types). The key Z toggles the zooming mode under the selection brush.
+
+In a key release event, we set the selection mode to 'none'. If PageUp or PageDown is pressed (or equivalently use square brackets [ and ]), we show the brush history step by step.
+
+## Mode Selection
+
+A selection mode is essentially a logical operation like AND, OR, and XOR, etc.
+
+There are five selection modes:
+
+1. **none** -ignore previous selection and completely start over again
+2. **and** - select the intersection, i.e. the objects that are selected by two successive brushing operations
+3. **or** - select the union, i.e. any objects selected by all previous operations and the current operation
+4. **xor** - toggle the selection
+5. **not** - negation, i.e. exclude the objects under two successive brushing operations
+
+complement
+the complement of the current selection
+
+We can hold the key while brushing: A for 'and', O for 'or', X for 'xor', N for 'not' and C for 'complement'.
+
+# Building Blocks
+
+
+- 1d:
+  - record_selector
+  - qhist/qspine
+  - qdensity
+  - qbar
+- 2d:
+  - qscatter
+- nd:
+  - qparallel
+  - qboxplot
+  - /qmosaic
+- special:
+  - qtime
+  - /qmval
+  - /qmap
+  - /qtour
+- linking:
+  - link_cat
+
+
+TODO: example workflow, programmatic usage 
+
+# qdata
+
+```{r, eval=FALSE}
+library('cranvas')
+qtennis <- qdata(tennis)
+qhist(double.faults, qtennis)
+
+cranvas_off()
+```
+
+# record_selector
+
+We use a GUI created by qtbase to subset the data based on a given categorical variable. Specifically, we choose certain values of the variable (using the mouse or keyboard) and all the observations which have the same values on this variable will be brushed. This selector can link to any plots based on a mutaframe created by qdata.
+
+```{r, eval=FALSE}
+record_selector(vars, data)
+```
+
+The GUI supports multiple selections when we hold the Shift or Ctrl key. If the character string in the text input box matches with multiple items in the list, all of them will be selected.
+
+When we select items in the list, usually a plot based on the same data will get brushed accordingly. On the other hand, when we click on a plot, the corresponding items in the list will be selected as well.
+
+# qhist & qspine
+
+```{r, eval=FALSE}
+qhist(x, data, bins = 30, binwidth = NULL, breaks = NULL, ybreaks = NULL, freq = TRUE, 
+    main = "", horizontal = FALSE, spine = FALSE, xlim = NULL, ylim = NULL, xlab = NULL, 
+    ylab = NULL)
+
+qspine(x, data, ...)
+```
+
+Draw an interactive histogram or spine plot based on a continuous variable, optionally split by a categorical variable. It supports some common keyboard interactions (see common_key_press) as well as other interactions specific to histograms and spine plots.
+
+The splitting variable is usually specified in qdata as the color or border argument; if it is present, each bar in the plot will be split into categories.
+
+Arrow keys can be used to change the binwidth as well as the breakpoints in the plot. Up and Down can increase and decrease the binwidth respectively; Left and Right can move the breakpoints of the bins to the left (smaller) or right (larger). Mouse wheel helps zoom in/out of the plot.
+
+In the identify mode, the breakpoints of the bin(s) as well as counts and proportion of cases in the bin(s) are shown as text labels in the plot.
+
+# qdensity
+
+Draw a univariate density plot, with a rug plot underneath.
+
+```{r, eval=FALSE}
+qdensity(x, data, binwidth = NULL, main = "", xlim = NULL, ylim = NULL, xlab = NULL, 
+    ylab = NULL)
+```
+
+Specific interactions include: Arrow Up/Down in-/de-creases size of points; Arrow Left/Right de-/in-creases binwidth for density; Key Z toggle zoom on/off (default is off); mouse click & drag will specify a zoom window.
+
+
+# qbar
+
+```{r eval=FALSE}
+qbar(x, data, weight = NULL, space = 0.1, main = "", horizontal = FALSE, standardize = FALSE, xlim = NULL, ylim = NULL, xlab = NULL, ylab = NULL)
+```
+
+
+In the identify mode (press the key ? to toggle between brush and identify mode), the variable and its identified values are shown as a text label in the plot, along with the counts and proportion of the identified categories. If the bar plot is split by an additional categorical variable, it will also be shown in the label.
+
+A zero-count category is represented by a one-pixel rectangle, which is a useful visual hint to indicate the presence of this category.
+
+The x-axis (or y-axis when horizontal = TRUE) tickmark locations are from 1 to n shifted to the right by 0.5 (i.e. 1.5, 2.5, ...), where n is the number of levels of the factor variable to be plotted.
+
+# qscatter 
+
+This function creates a scatter plot with two numeric variables. It supports colors and sizes generated by qdata. When the sizes are not the same, a scatter plot becomes what is called the “bubble chart”.
+
+```{r, eval = FALSE} 
+qscatter(x, y, data, edges = NULL, main = "", xlim = NULL, ylim = NULL, xlab = NULL, ylab = NULL, asp = 1, alpha = 1, unibrushcolor = TRUE)
+```
+
+In the identify mode, the plot will show the row id(s) of the identified point(s) as well as x and y values.
+
+Arrow keys are used in scatter plots for interactions: without the Shift key, Up and Down will increase/decrease the sizes of points; with the Shift key being pressed, Up, Down, Left and Right will move the (background of) plot to the corresponding direction.
+
+Mouse wheel is used to zoom in and zoom out the plot. Together with keyboard interactions, this will enable us to see details in data.
+
+# qparallel
+
+This function creates a parallel coordinates plot (par-coords) for variables in a data, with each line representing a row.
+
+```{r, eval = FALSE} 
+qparallel(vars = ~., data, scale = "range", names = break_str(vars), 
+    na.action = na_impute, center = NULL, order = c("none", "MDS", "ANOVA", 
+        "randomForest"), horizontal = FALSE, glyph = c("auto", "line", 
+        "tick", "circle", "square", "triangle"), boxplot = FALSE, width = NULL, 
+    jitter = NULL, amount = NULL, main = "", alpha = 1)
+```
+
+Interactions specific to par-coords include: press R to toggle the min/max labels; the arrow keys are used to adjust the order of the variables and flip the values of variables (like a mirror reflection) when the axes are selected by the brush.
+
+# qboxplot
+
+his function can draw side-by-side boxplots for all the variables in a data frame or boxplots for a continous variable vs a categorical variable.
+
+```{r, eval = FALSE} 
+qboxplot(vars, data, at = NULL, width = NULL, horizontal = FALSE, main = "", 
+    xlim = NULL, ylim = NULL, xlab = NULL, ylab = NULL, points = FALSE)
+```
+
+Note boxplots also supports brushing and can respond to brushing in other plots. When we brush in other plots which are based on the same data, there will be “child” boxplots in this plot showing the distributions of the brushed data.
+
+# qtime
+
+Draw a time-series plot.
+
+```{r, eval = FALSE} 
+qtime(time, y, data, group = NULL, shift = c(1, 4, 7, 12, 24), alpha = 1, size = 2, 
+    asp = NULL, series.stats = ifelse(nrow(data) < 1000, TRUE, FALSE), fun.base = min, 
+    main = NULL, xlab = NULL, ylab = NULL, ...)
+```
+
+- Arrow up/down: in-/de-crease size of points.
+- Arrow left/right: wrap the time series in the initial mode, and drag the series in the series selection mode.
+- Shift + right: Time series will be folded directly to the width of maximal value in argument shift.
+- Shift + left: Time series will be backed to the original xaxis position.
+- Key '+'/'-': de-/in-crease alpha level (starts at alpha=1 by default).
+- Key 'u'/'d': separate/mix the series groups or the period by shifting them up and down.
+- Shift + 'u'/'d': for multivariate y's, separate/mix them by shifting up and down.
+- Key 'g': change the wrapping period circularly in the values of parameter 'shift'.
+- Key 'm': Switch the mode for series selection. Default to be off. When there are more than one series in the plot, users can turn it on to hold a series and shift the series horizontally by dragging with the mouse.
+- Key 'y': y-wrapping
+- Shift + 'y': y-wrapping backward
+- Key 'r': switch to the area plot
+- Key 'f': fold the series to a horizon plot
+- Wheel: Zoom in/out. Then users can drag the series horizontally to see the details.
+
+# link_cat
+
+This function links two mutaframes together (or one mutaframe to itself) by a common categorical variable so that whenever one element (or multiple elements) in a category (or multiple categories) is brushed, all elements in this (these) categories will be brushed.
+
+```{r, eval = FALSE} 
+link_cat(mf1, var1, mf2 = NULL, var2 = NULL)
+```
+
+Categorical linking is achieved by a series of logical operations: first, look for which rows are brushed in the first mutaframe, and find out the values of its linking variable as well as the categories they belong to, then look for which elements of the linking variable in the second mutaframe (possibly the same mutaframe) are in these categories, and brush these elements (corresponding to rows).
