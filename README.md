@@ -43,18 +43,22 @@ TODO: tutorial resources and sample code.
   
 ### Cranvas 
 
-Afaik, Cranvas does not have a cohesive vignette (a large part of its hipster charm ;)). My recommendation is to go through the Mondrian tutorial slides above, then the package docs below, then reproduce the tips tutorial using Cranvas.
+Afaik, Cranvas does not have a cohesive vignette (a large part of its hipster charm ;)). My recommendation is to go through the Mondrian tips tutorial slides and use the provided companion code reproduce the  tutorial using Cranvas.
 
-- [Tutorial (package docs)](https://www.rdocumentation.org/packages/cranvas) - see qscatter, qhist, qbar, qparallel for intro examples
+
+- Tutorial:  [slides](http://www.interactivegraphics.org/Slides.html) | [code](https://www.github.com/mul118/docker-cranvas-ggobi/examples/cranvas_intro.R)
+- [Cranvas Cheatsheet (WIP)](https://www.github.com/mul118/docker-cranvas-ggobi/examples/cranvas_cheatsheet.Rmd)
+- [Package Docs](https://www.rdocumentation.org/packages/cranvas) - see qscatter, qhist, qbar, qparallel for intro examples
 - [Cranvas Overview Paper](https://arxiv.org/pdf/1409.7256.pdf) 
 
-- Qtime
-- Model visualizations
+# Extensions:
 
-
-### Tools
-
+- [Qtime](https://pdfs.semanticscholar.org/f8b5/26fb936fc25ca10c004deb4db667c29f9c5a.pdf): Cranvas Time-series interactions (see p 32)
+- *Visualizing Statistical Models*: [paper](http://had.co.nz/stat645/model-vis.pdf) | [Cranvas code](https://www.github.com/mul118/docker-cranvas-ggobi)
 - *Idendro*: [Intro & Sample Code](https://github.com/tsieger/idendro) | [Full Vignette](https://github.com/tsieger/idendro/blob/master/inst/doc/idendro.pdf)
+- Qtour - high-dimensional tours
+- Qmval - missing values
+
 
 - *GGobi*: [Resources](http://www.ggobi.org/docs) | [Manual](http://www.ggobi.org/docs/manual.pdf) | [Rggobi Intro](http://www.ggobi.org/rggobi/introduction.pdf)
 
