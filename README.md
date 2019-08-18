@@ -11,7 +11,7 @@ Docker image containing a browser-accessible Ubuntu installation with included R
 From command line, run
 
 ``` bash
-docker run -p 6080:80 -v [YOUR LOCAL WORKING DIRECTORY]:/root/work mul118/docker-cranvas-ggobi
+docker run -itd -p 6080:80 -v [YOUR LOCAL WORKING DIRECTORY]:/root/work mul118/docker-cranvas-ggobi
 ```
 
 Then, browse to http://127.0.0.1:6080/ . Open Rstudio and attach the cranvas library. Enjoy!
