@@ -14,7 +14,7 @@ From command line, run
 docker run -itd -p 6080:80 -v [YOUR LOCAL WORKING DIRECTORY]:/root/work mul118/docker-cranvas-ggobi
 ```
 
-Then, browse to http://127.0.0.1:6080/ . Open Rstudio and attach the cranvas library. Enjoy!
+The startup process will take about *5 minutes*. Once the container is running, browse to http://127.0.0.1:6080/, open Rstudio and attach the cranvas library. Enjoy!
 
 ## Motivation
 
