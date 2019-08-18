@@ -11,10 +11,16 @@ Docker image containing a browser-accessible Ubuntu installation with included R
 From command line, run
 
 ``` bash
-docker run -p 6080:80 -v [YOUR LOCAL WORKING DIRECTORY]:/root/work mul118/docker-cranvas-ggobi
+docker run -itd -p 6080:80 -v [YOUR LOCAL WORKING DIRECTORY]:/root/work mul118/docker-cranvas-ggobi
 ```
 
-Then, browse to http://127.0.0.1:6080/ . Open Rstudio and attach the cranvas library. Enjoy!
+The startup process will take about *5 minutes* the first time. Once the container is running, browse to http://127.0.0.1:6080/. Open the terminal (Start > System Tools > LXTerminal) and type:
+
+``` bash
+/startup_cranvas_patch.sh
+```
+
+When the patch finishes applying, open Rstudio and attach the cranvas library. Enjoy!
 
 ## Motivation
 
