@@ -49,9 +49,9 @@ RUN R -e "remotes::install_github(args = '--no-multiarch', INSTALL_opts = '--no-
     'ggobi/cranvas', \
     'tsieger/idendro'))"
     
-COPY cranvas_startup_patch.sh /cranvas_startup_patch.sh
+# Patch to fix docs installation    
+COPY startup_cranvas_patch.sh /startup_cranvas_patch.sh
 
-ENTRYPOINT ["/startup.sh && /cranvas_startup_patch.sh"]
 
      
  
