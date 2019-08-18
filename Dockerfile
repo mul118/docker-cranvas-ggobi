@@ -48,6 +48,10 @@ RUN R -e "remotes::install_github(args = '--no-multiarch', INSTALL_opts = '--no-
     'ggobi/qtpaint@5a2a582', \
     'ggobi/cranvas', \
     'tsieger/idendro'))"
+    
+COPY cranvas_startup_patch.sh /
+
+ENTRYPOINT ["/startup.sh", "/cranvas_startup_patch.sh"]
 
      
  
